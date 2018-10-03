@@ -104,6 +104,12 @@ def install_distro():
         iso_extract_full(config.image_path, usb_mount)
     elif config.distro == 'ReactOS':
         iso_extract_full(config.image_path, usb_mount)
+        print('copy mboot.c32 for reactos')
+        # need to explicitly copy mboot.c32 to /multiboot/
+        multiboot_dir = os.path.join(config.usb_mount, 'multibootusb')
+        # Version 4 works with ReactOS
+        modules_src_dir = os.path.join(multibootusb_host_dir(), "syslinux", "modules", '4')
+        shutil.copy(os.path.join(modules_src_dir, 'mboot.c32'), multiboot_dir)
     elif config.distro == 'grub4dos_iso' or config.distro == 'raw_iso' or config.distro == 'memdisk_iso' or \
                     config.distro == 'memdisk_img':
         copy_iso(config.image_path, install_dir)
