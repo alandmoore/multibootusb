@@ -246,7 +246,8 @@ def perform_strict_detections(iso_cfg_ext_dir, iso_file_list):
         ('salix-live', contains('boot/menus/mainmenu.cfg',
                                 'MENU LABEL SALIX LIVE')),
         ('grml',       contains('boot/isolinux/vesamenu.cfg',
-                                'menu title  Grml - Live Linux'))
+                                'menu title  Grml - Live Linux')),
+        ('ReactOS',    contains('readme.txt', 'ReactOS'))
         ]
     for distro, predicate in test_vector:
         predicates = [predicate] if callable(predicate) else predicate
